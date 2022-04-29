@@ -11,19 +11,20 @@
  */
 class Solution {
 public:
-    //RECURSIVE T.C = O(N) WORST CASE ( SKEW TREE)
-    //S.C = O(N) FOR RECURSIVE STACK
-    
+    //ITERATIVE SOLUTION
+    //T.C = O(N) IN WORST CASE (SKEW TREE)
+    //S.C = O(1)
     TreeNode* searchBST(TreeNode* root, int val) {
-            //BASE CASE
-            if(root == NULL) return NULL;
-        
+             
+        while(root){
             if(root->val == val)
                 return root;
-        
-            if(val < root->val)
-                return searchBST(root->left,val);
+            else if(val < root->val)
+                root = root->left;
             else
-                return searchBST(root->right,val);
+                root = root->right;
+        }
+        
+        return NULL;
     }
 };
