@@ -12,16 +12,18 @@ class Solution {
                 //code for applying bfs on one node
                 queue<int> q;
                 q.push(i);
+                visited[node] = 1;
                 while(!q.empty()){
                     int node = q.front();
                     q.pop();
                     bfs.push_back(node);
-                    visited[node] = 1;
-                    
+                                    
                     //traverse adjacent nodes to given node
                     for(auto it : adj[node]){
-                        if(visited[it] == 0)
+                        if(visited[it] == 0){
                             q.push(it);
+                            visited[node] = 1;
+                        }
                     }
                 }
                 
@@ -32,3 +34,4 @@ class Solution {
     }
     
 };
+*jab bhi queue mein push kare tab visited mark karna hai
