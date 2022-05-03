@@ -1,1 +1,1 @@
-​
+​Same concept, find connected components. The only twist is that the connected neighbors are presented in a different form. Here we don’t destroy the matrix, but use an array to keep track of visited ( friendZoned ). Notice the stack pattern, it is exactly the same as in connected components problem. All that changes is the way neighbors are defined. If we were to write an iterative version for the islands problems, it would also be very similar.
