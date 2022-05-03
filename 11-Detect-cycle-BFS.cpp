@@ -1,3 +1,7 @@
+Time Complexity: O(N+E),  N is the time taken and E is for traveling through adjacent nodes overall. 
+
+Space Complexity: O(N+E) +  O(N) + O(N) , space for adjacent list , array and queue
+
 #include <bits/stdc++.h>
 using namespace std;
 class Solution
@@ -68,3 +72,5 @@ int main()
  
     return 0;
 }
+
+
