@@ -9,22 +9,24 @@ using namespace std;
 class Solution{
 public:	
 	int findKRotation(int arr[], int n) {
-	   if(n<=1) return 0;
-	   int l= 0;
-	   int h=n-1;
-	   
-	   while(l<=h){
-	       int mid = l + (h-l)/2;
-	       
-	       if(mid<h && arr[mid]>arr[mid+1])return mid+1;
-	       
-	       if(mid>l && arr[mid-1]>arr[mid]) return mid;
-	       
-	       if(arr[mid]<arr[h])  h = mid-1;
-	       else l = mid+1;
-	   }
-	   return 0;
-	}
+	    int l=0;
+	    int h = n-1;
+	    
+	    while(l<=h){
+	        int mid = l+(h-l)/2;
+	        int next = (mid+1)%n;
+	        int prev = (mid+n-1)%n;
+	        
+	        if(arr[mid]<=arr[next] && arr[mid]<=arr[prev] ) 
+	        return mid;
+	        
+	        if(arr[mid]<=arr[h])
+	            h = mid-1;
+	        else l = mid+1;
+	    }
+	    
+	    return 0;
+}
 
 };
 
