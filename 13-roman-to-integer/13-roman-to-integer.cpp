@@ -1,25 +1,20 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        map<char,int> mpp;
-        mpp['I'] = 1;
-        mpp['V'] = 5;
-        mpp['X'] = 10;
-        mpp['L'] = 50;
-        mpp['C'] = 100;
-        mpp['D'] = 500;
-        mpp['M'] = 1000;
-        
-        int ans= 0;
-        int i=s.length()-1;
-        ans += mpp[s[i--]];
-        while(i>=0){
-            if(mpp[s[i]]<mpp[s[i+1]])
-                ans -= mpp[s[i]];
-            else
-                ans += mpp[s[i]];
-            i--;
+         int ans = 0, num;
+        for(int i = s.size() - 1; i >= 0;i--){
+            switch(s[i]) {
+                case 'I': num = 1; break;
+                case 'V': num = 5; break;
+                case 'X': num = 10; break;
+                case 'L': num = 50; break;
+                case 'C': num = 100; break;
+                case 'D': num = 500; break;
+                case 'M': num = 1000; break;
+            }
+            if(4 * num < ans)   ans -= num;
+            else ans += num;
         }
-        return ans;        
+        return ans;     
     }
 };
