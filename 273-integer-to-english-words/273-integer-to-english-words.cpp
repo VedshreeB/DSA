@@ -1,40 +1,74 @@
 class Solution {
 public:
-    string numberToWords(int num) {
-        if(num==0)
-	return "Zero";
-
-string s="";
-string THOUSANDS[4] = {"","Thousand","Million","Billion"};
-string ONES[10]= {"","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"};
-string TENS[10]= {"","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"};
-string TENS1[10]={"Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
-
-int i=0;
-while(num!=0)
-{
-int ones = 0,tens=0,hunds=0;
-string s1="";
-
-ones = num%10; num=num/10; 
-tens = num%10; num=num/10;
-if(tens==1)
-	s1 = TENS1[ones]+" "+s1;
-else
-{
-	if(ones>0)  s1= ONES[ones]+ " "+s1;
-	if(tens>0) s1 = TENS[tens]+" "+s1;
-}            
-hunds = num%10; num=num/10;
-if(hunds>0) s1 = ONES[hunds]+" Hundred"+" "+s1;
-
-if(i>0 && s1.size()>0) 
-	s= s1+THOUSANDS[i]+" "+s;
-else
-	s=s1+s;
-i++;
-}
-
-return s.substr(0,s.size()-1);
-    }
+      string numberToWords(int num)
+        {
+            string word[] = { "Zero",
+                "One",
+                "Two",
+                "Three",
+                "Four",
+                "Five",
+                "Six",
+                "Seven",
+                "Eight",
+                "Nine",
+                "Ten",
+                "Eleven",
+                "Twelve",
+                "Thirteen",
+                "Fourteen",
+                "Fifteen",
+                "Sixteen",
+                "Seventeen",
+                "Eighteen",
+                "Nineteen" };
+            string word10[] = { "None",
+                "Ten",
+                "Twenty",
+                "Thirty",
+                "Forty",
+                "Fifty",
+                "Sixty",
+                "Seventy",
+                "Eighty",
+                "Ninety" };
+            string wordBig[] = { "Thousand",
+                "Million",
+                "Billion" };
+            string result = "";
+           	//-----------------------------------------------------------
+            if (num >= 1000000000)
+            {
+                result += numberToWords(num / 1000000000) + " " + "Billion" + " ";
+                num %= 1000000000;
+            }
+            if (num >= 1000000)
+            {
+                result += numberToWords(num / 1000000) + " " + "Million" + " ";
+                num %= 1000000;
+            }
+            if (num >= 1000)
+            {
+                result += numberToWords(num / 1000) + " " + "Thousand" + " ";
+                num %= 1000;
+            }
+            if (num >= 100)
+            {
+                result += word[num / 100] + " " + "Hundred" + " ";
+                num %= 100;
+            }
+            if (num >= 20)
+            {
+                result += word10[num / 10] + " ";
+                num %= 10;
+            }
+            if (num == 0)
+            {
+                if (result == "")
+                    return word[0];
+            }
+            else result += word[num] + " ";
+            result.pop_back();
+            return result;
+        }
 };
