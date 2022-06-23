@@ -1,23 +1,27 @@
 class Solution {
 public:
-    //WORD BY WORD
-    string LCP(string s1,string s2){
-        string ans = "";    //empty string
-        
-        int len = min(s1.length(),s2.length());
-        
-        for(int i=0; i<len; i++){
-            if(s1[i]!=s2[i]) break;
-            ans += s1[i];
-        }
-        return ans;
-    }
     string longestCommonPrefix(vector<string>& strs) {
         int n = strs.size();
-        string prefix = strs[0];
-        for(int i=1 ; i<n ; i++)
-            prefix = LCP(prefix,strs[i]);
+        int minlen = INT_MAX;
+        bool flag = false;
         
-        return prefix;
+        for(int i=0 ; i<n ; i++){
+            if(minlen > strs[i].length()) minlen = strs[i].length();
+        }
+        
+        string ans = "";
+        for(int i=0; i<minlen ; i++){
+            for(int j=0 ; j<n-1 ; j++){
+                if(strs[j][i] != strs[j+1][i]){
+                    flag = true;
+                    break;
+                }
+                    
+            }
+            if(!flag)
+                ans += strs[0][i];
+            else break;
+        }
+        return ans;
     }
 };
