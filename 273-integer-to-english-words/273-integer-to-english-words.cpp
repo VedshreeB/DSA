@@ -32,9 +32,7 @@ public:
                 "Seventy",
                 "Eighty",
                 "Ninety" };
-            string wordBig[] = { "Thousand",
-                "Million",
-                "Billion" };
+            
             string result = "";
            	//-----------------------------------------------------------
             if (num >= 1000000000)
