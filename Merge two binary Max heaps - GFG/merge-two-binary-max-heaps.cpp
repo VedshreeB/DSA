@@ -27,33 +27,19 @@ class Solution{
             max_heapify(v,largest,size);
         }
     }
-    void deleteFromHeap(vector<int> &v, int size){
-        v[0] = v[size-1];
-        size--;
-        max_heapify(v,0,size);
-    }
     
     vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) {
         vector<int> ans;
         
-        
-        while(n>0 && m>0){
-            if(a[0] >= b[0]){
-                ans.push_back(a[0]);
-                deleteFromHeap(a,n);
-                n--;
-            }
-            else{
-                ans.push_back(b[0]);
-                deleteFromHeap(b,m);
-                m--;
-            }
-        }
-        for(int i=0; i<n ; i++){
-            ans.push_back(a[i]);
-        }
-        for(int i=0; i<m ; i++){
-            ans.push_back(b[i]);
+        for(auto i: a)
+            ans.push_back(i);
+        for(auto i : b)
+            ans.push_back(i);
+            
+        //build maxheap from ans
+        n = n+m;
+        for(int i=n/2-1 ; i>=0 ; i--){
+            max_heapify(ans,i,n);
         }
         
         return ans;
