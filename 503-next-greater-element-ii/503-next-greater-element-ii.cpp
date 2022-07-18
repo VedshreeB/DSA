@@ -8,7 +8,10 @@ public:
         for(int i=2*n-1; i>=0 ; i--){
         while(!stk.empty() && stk.top()<=nums[i%n]) stk.pop();
         
-        if(!stk.empty()) res[i%n] = stk.top();
+        if(i<n){
+            if(!stk.empty()) res[i] = stk.top();    
+        }
+        
             
         stk.push(nums[i%n]);
         }
