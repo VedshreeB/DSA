@@ -7,17 +7,13 @@ public:
     
     int next(int price) {
         int cnt=1;
-        if(stk.empty()){
-            stk.push({price,cnt});
-        }
-        else{
-           while(!stk.empty() && stk.top().first <= price){
+
+        while(!stk.empty() && stk.top().first <= price){
                cnt += stk.top().second;
                stk.pop();
-           }
+        } 
             
-            stk.push({price,cnt});
-        }
+        stk.push({price,cnt});
         return cnt;
     }
     
