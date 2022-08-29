@@ -24,3 +24,6 @@ public:
        return solve(n-1,sum,arr,dp);
     }
 };
+
+//T.C = O(n*sum)
+//S.C = O(n*sum) + O(n)
