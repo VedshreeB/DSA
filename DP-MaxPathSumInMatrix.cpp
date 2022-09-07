@@ -1,6 +1,7 @@
 //{ Driver Code Starts
 // Initial Template for C++
-
+//t.c = O(n^3)
+//s.c = O(n)
 #include <bits/stdc++.h>
 using namespace std;
 
