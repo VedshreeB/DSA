@@ -19,6 +19,9 @@ int main() {
 	return 0;
 }
 /*
+SOLUTION: It is obvious that all the digits, which are greater than 4, need to be inverted. The only exception is 9, if it's the first digit.
+
+Complexity: o(LENGTH OF NUMBER)
 91730629
 Output
 91730629
