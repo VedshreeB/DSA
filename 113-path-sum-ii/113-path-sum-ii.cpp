@@ -11,30 +11,30 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root,int sum,vector<int> &v,vector<vector<int>> &ans)
-    {
-        if(!root) return;
-
-        v.push_back(root->val);
-        sum -= root->val;
+    void solve(TreeNode *root,int T,vector<int> &path,vector<vector<int>> &ans){
+        if(root==NULL)return;
         
-        if(!root->left && !root->right && sum == 0)
-            ans.push_back(v);
-        else
-        {
-            solve(root->left,sum,v,ans);
-            solve(root->right,sum,v,ans);
+        if(root->left == NULL && root->right==NULL){
+            if(T==root->val){
+                path.push_back(root->val);
+                ans.push_back(path);
+                path.pop_back();
+            }
+            return;
         }
-
-        v.pop_back();
+        
+        path.push_back(root->val);
+        solve(root->left,T-root->val,path,ans);
+        solve(root->right,T-root->val,path,ans);
+        path.pop_back();       
+        
     }
+    
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<vector<int>> ans;
-
-        if(root==NULL) return ans;
-
-        vector<int> v;
-        solve(root,targetSum,v,ans);
+        vector<int> path;
+        if(root == NULL)return ans;                          
+        solve(root,targetSum,path,ans);
         return ans;
     }
 };
