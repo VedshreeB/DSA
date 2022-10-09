@@ -12,23 +12,23 @@
 
 class Solution {
 public:
-    void inorderT(TreeNode *root,vector<int> &inorder){
+    void f(TreeNode *root,vector<int> &inorder){
         if(!root)return;
         
-        inorderT(root->left,inorder);
+        f(root->left,inorder);
         inorder.push_back(root->val);
-        inorderT(root->right,inorder);
+        f(root->right,inorder);
     }
     bool findTarget(TreeNode* root, int k) {
-        vector<int> inorder;
-        inorderT(root,inorder);
+        vector<int> v;
+        f(root,v);
         
-        unordered_map<int,int> mpp;
-        for(int i=0; i<inorder.size(); i++){
-            if(mpp.find(k-inorder[i]) != mpp.end()){
-                return true;
-            }else
-                mpp[inorder[i]]++;
+        int i=0;
+        int j=v.size()-1;
+        while(i<j){  
+            if(v[i]+v[j] == k)return true;
+            else if(v[i]+v[j] > k) j--;
+            else i++;
         }
         return false;
     }
