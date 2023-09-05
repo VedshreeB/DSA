@@ -1,42 +1,52 @@
-#include <bits/stdc++.h>
-int solve(int i,int j,int m,int n){
-    //base case
-    if(i<0 || j<0 || i>=m || j>=n) return 0;
-    if(i==m-1 && j==n-1){
-        return 1;
+//IMPORTANT RULE - 
+//Recur top-left to bottom-right
+//Tab bottom-right to top-left but changes occur only in 
+//1.base case(bottom-right)  2.return dp[0][0](top-left)
+
+class Solution {
+public:
+    int RecurSolve(int i,int j, int r, int c,vector<vector<int>> &dp){
+        if(i==(r-1) && j==(c-1)) return 1;
+
+        if(dp[i][j]!= -1) return dp[i][j];
+        
+        int right = 0,down = 0;
+        if((j+1) < c)
+            right = RecurSolve(i,j+1,r,c,dp);
+        if((i+1) < r)
+            down = RecurSolve(i+1,j,r,c,dp);
+
+        return dp[i][j] = (right+down);
     }
     
-    int right = solve(i,j+1,m,n);
-    int down = solve(i+1,j,m,n);
-    return right+down;
-}
-int memoized(int i,int j,int m,int n,vector<vector<int>> &dp){
-    //base case
-    if(i<0 || j<0 || i>=m || j>=n) return 0;
-    if(i==0 && j==0){
-        return dp[i][j] = 1;
-    }
-    if(dp[i][j] != -1) return dp[i][j];
-    int left = memoized(i,j-1,m,n,dp);
-    int up = memoized(i-1,j,m,n,dp);
-    dp[i][j] = (right+down);
-    return dp[i][j];
-}
-int uniquePaths(int m, int n) {
-    //vector<vector<int>> dp(m,vector<int>(n,-1));
-	//return memoized(0,0,m,n,dp);
-    
-    vector<vector<int>> dp(m,vector<int>(n,-1));
-    //base case
-    dp[0][0] = 1;
-    for(int i=0; i<m; i++){
-        for(int j=0; j<n; j++){
-            if(i==0 && j==0) continue;
-            int left = dp[i][j-1];
-            int up = dp[i-1][j];
-            dp[i][j] = (right+down);
-            return dp[i][j];
+    int tab(int m,int n){
+        vector<vector<int>> dp(m,vector<int>(n,-1));
+
+        //base case
+        dp[m-1][n-1] = 1;
+
+        for(int i=m-1; i>=0; i--){
+            for(int j=n-1; j>=0 ; j--){
+                if(i==m-1 && j==n-1) continue;
+
+                int right = 0,down = 0;
+                if((j+1) < n)
+                    right = dp[i][j+1];
+                if((i+1) < m)
+                    down = dp[i+1][j];
+
+                dp[i][j] = (right+down);
+               
+            }
         }
+        return dp[0][0];
     }
-    return dp[m-1][n-1];
-}
+    
+    int uniquePaths(int m, int n) {
+        //top-left to bottom-right
+        //vector<vector<int>> dp(m,vector<int>(n,-1));
+        
+        //return RecurSolve(0,0,m,n,dp);
+        return tab(m,n);
+    }
+};
