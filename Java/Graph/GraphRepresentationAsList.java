@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 class Main {
     //implementation of graph representation as adjancency list in java
+    //note vertices are numbered from 1
   public static void main(String[] args) {
     ArrayList<ArrayList<Integer>> adj = new ArrayList<ArrayList<Integer>>();
     //intialization
@@ -19,5 +20,14 @@ class Main {
     //adding edge for directed graph
     //edge 1--->3
     adj.get(1).add(3);
+    
+    
+    //print all edges
+    for(int i=1; i<=v ; i++)
+    {
+        for(int u: adj.get(i)){
+            System.out.println("edge from vertex:"+ i + " to " + u);
+        }
+    }
   }
 }
