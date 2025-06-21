@@ -1,0 +1,5 @@
+Integer.MAX_VALUE; 
+  value a 32 bit signed integer can hold.
+  it is equal to 2^31 -1 . why it is not 2^32 -1 bcoz one bit is used to hold sign
+
+Integer.MIN_VALUE
